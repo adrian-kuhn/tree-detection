@@ -35,7 +35,6 @@ class Controller:
         if self.ready():
             start_time = datetime.datetime.now()
             self._load_assignments()
-            self.assignments = [ass for ass in self.assignments if ass.tile_number == 1150412]
             self._run_serial() if settings.get("processing.processes") == 1 else self._run_parallel()
             self.exporter.to_gdb()
             self.exporter.clip_boundary()

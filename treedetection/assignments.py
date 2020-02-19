@@ -150,7 +150,7 @@ class Assignment:
         # Separating field from forest regions
         regions_field = label(mask)
         regions_forest = numpy.copy(regions_field)
-        region_props = regionprops(regions_field, coordinates='xy', intensity_image=self.dtm.image)
+        region_props = regionprops(regions_field, intensity_image=self.dtm.image)
         forest_labels = [r.label for r in region_props if
                          r.filled_area / (
                                  self.params.resolution * self.params.resolution) > self.params.forest_area_threshold or r.mean_intensity > self.params.conifer_height_threshold]
@@ -196,7 +196,7 @@ class Assignment:
         found_trees = {}
 
         # Tree position (3D)
-        for tree in regionprops(trees, coordinates="xy", intensity_image=self.dom.image):
+        for tree in regionprops(trees, intensity_image=self.dom.image):
             # Export with location of weighted_centroid
             centroid = list(tree.weighted_centroid)
             if self.params.tile_buffer * self.params.resolution < centroid[0] < self.dom.image.shape[0] - (
@@ -224,7 +224,7 @@ class Assignment:
                                                area=tree.filled_area / (
                                                        self.params.resolution * self.params.resolution))
 
-        for tree in regionprops(trees, coordinates="xy", intensity_image=self.dtm.image):
+        for tree in regionprops(trees, intensity_image=self.dtm.image):
             if tree.label in found_trees:
                 t = found_trees[tree.label]
                 ohm = tree.intensity_image[numpy.nonzero(tree.intensity_image)]

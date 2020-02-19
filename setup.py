@@ -24,7 +24,7 @@ if sys.argv[-1] == "publish":
 required = [
     "arcgis > 1.6",
     "numpy >= 1.16.2",
-    "scikit-image >= 0.15",
+    "scikit-image >= 0.16",
     "laspy >= 1.2"
 ]
 
