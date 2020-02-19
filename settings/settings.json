@@ -1,0 +1,114 @@
+{
+  "processing": {
+    "processes": 6
+  },
+  "algorithm": {
+    "tile_buffer": 20,
+    "chm_resolution": 0.25,
+    "forest_area_threshold": 1000,
+    "conifer_height_threshold": 1000,
+    "closing_radius": 3.3,
+    "field_denoising_weight": 75,
+    "field_sigma": 2.3,
+    "field_truncate": 4.0,
+    "field_min_distance": 6,
+    "field_compactness": 100,
+    "forest_denoising_weight": 0,
+    "forest_sigma": 0.7,
+    "forest_truncate": 25.0,
+    "forest_min_distance": 5,
+    "forest_compactness": 110
+  },
+  "tree_restrictions": {
+    "max_tree_height": 60,
+    "max_tree_diameter": 40,
+    "timberline": 1900,
+    "min_tree_height": 3.0,
+    "min_major_axis": 0.5,
+    "min_minor_axis": 0.5,
+    "min_eccentricity": 0.25
+  },
+  "data": {
+    "las": [
+	  "D:\\UNIGIS\\Masterarbeit\\lidar_lu\\LAS14\\DOM18WLK_V1_RAS_T{tile_number}.las",
+	  "H:\\Masterarbeit_Backup\\lidar_lu\\LAS14\\DOM18WLK_V1_RAS_T{tile_number}.las"
+    ],
+    "dom": [
+	  "D:\\UNIGIS\\Masterarbeit\\lidar_lu\\DOM\\DOM18025_V1_RAS_T{tile_number}.tif",
+	  "H:\\DOM\\DOM18025_V1_RAS_T{tile_number}.tif"
+    ],
+    "dtm": [
+	  "D:\\UNIGIS\\Masterarbeit\\lidar_lu\\DTM\\DTM18025_V1_RAS_T{tile_number}.tif",
+	  "H:\\DTM\\DTM18025_V1_RAS_T{tile_number}.tif"
+    ],
+    "tmp_trees": "D:\\UNIGIS\\Masterarbeit\\Code\\tree-detection\\results\\temp_trees\\trees_{tile_number}.csv",
+    "canton_boundary": "D:\\UNIGIS\\Masterarbeit\\lidar_lu\\GRZLUXXX_DS_V1_20191230.gdb\\GRZLUXXX_V1_PY",
+    "tiling": {
+      "gdb": "D:\\UNIGIS\\Masterarbeit\\lidar_lu\\REFKARBL_DS_V1_20171220.gdb",
+      "feature_class": "REFKARBL_V1_PY13",
+      "field_name": "BLATT",
+      "edge_length_north": 1250,
+      "edge_length_east": 750,
+      "top_left_diffs": [11, 104, 131, 224, 904, 1024, 19731, 19824, 20624],
+      "top_right_diffs": [-884, -764, -84, 9, 36, 129, 18836, 19636, 19729],
+      "bottom_left_diffs": [-19729, -19636, -18836, -129, -36, -9, 84, 764, 884],
+      "bottom_right_diffs": [-11, -104, -131, -224, -904, -1024, -19731, -19824, -20624]
+    }
+  },
+  "exporter": {
+    "folder": "D:\\UNIGIS\\Masterarbeit\\Code\\tree-detection\\results",
+    "overwrite": true,
+    "gdb": {
+      "name": "BAUMKATA_DS_V1.gdb",
+      "feature_class": "BAUMKATA_V1_PT",
+      "spatial_reference": 2056,
+      "fields": [
+        {"name": "BAUMNUMMER", "type": "INTEGER"},
+        {"name": "MAJOR_AXIS_LENGTH", "type": "DOUBLE"},
+        {"name": "MINOR_AXIS_LENGTH", "type": "DOUBLE"},
+        {"name": "FLAECHE", "type": "DOUBLE"},
+        {"name": "DTM_MIN", "type": "DOUBLE"},
+        {"name": "DTM_MEAN", "type": "DOUBLE"},
+        {"name": "DTM_MEDIAN", "type": "DOUBLE"},
+        {"name": "DTM_MAX", "type": "DOUBLE"},
+        {"name": "DOM_MIN", "type": "DOUBLE"},
+        {"name": "DOM_MEAN", "type": "DOUBLE"},
+        {"name": "DOM_MEDIAN", "type": "DOUBLE"},
+        {"name": "DOM_MAX", "type": "DOUBLE"},
+        {"name": "REL_BAUMHOEHE", "type": "DOUBLE"}
+      ]
+    }
+  },
+  "logging": {
+    "version": 1,
+    "disable_existing_loggers": true,
+    "formatters": {
+      "detailed": {
+        "class": "logging.Formatter",
+        "format": "%(asctime)s  %(levelname)-8s %(processName)-20s %(message)s"
+      }
+    },
+    "handlers": {
+      "console": {
+        "class": "logging.StreamHandler",
+        "level": "INFO",
+        "formatter": "detailed"
+      },
+      "file": {
+        "class": "logging.FileHandler",
+        "filename": "D:\\UNIGIS\\Masterarbeit\\Code\\tree-detection\\log\\treedetection.log",
+        "mode": "a",
+        "formatter": "detailed"
+      }
+    },
+    "loggers": {
+      "worker": {
+        "handlers" : ["console"]
+      }
+    },
+    "root": {
+      "level": "INFO",
+      "handlers": ["console", "file"]
+    }
+  }
+}
