@@ -1,6 +1,7 @@
 Tree detection
 ==============
 Command line application (CLI) to delineate single trees from LiDAR data, DOM and DTM.
+Realized as a master thesis for the canton of Lucerne to obtain the UNIGIS Master of Science (MSc) degree at the Paris-Lodron University Salzburg
 
 
 ![Final workflow](doc/final_workflow.png)
