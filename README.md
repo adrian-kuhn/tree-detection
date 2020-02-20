@@ -1,7 +1,7 @@
 Tree detection
 ==============
 Command line application (CLI) to delineate single trees from LiDAR data, DOM and DTM.
-Realized as a master thesis for the canton of Lucerne to obtain the UNIGIS Master of Science (MSc) degree at the Paris-Lodron University Salzburg
+Realized as a master thesis for the canton of Lucerne to obtain the UNIGIS Master of Science (MSc) degree at the Paris-Lodron University of Salzburg.
 
 
 ![Final workflow](doc/final_workflow.png)
@@ -11,22 +11,22 @@ In case of multiple processes, the tiles will be processed in parallel.
 After finishing of all sub processes, the main process is exporting the trees to a file geo
 database and clip it to the boundary of the canton.
 
-In the sub processes the las-, dom- and dtm-files are prepared, buffered before the watershed
+In the sub processes the LAS-, DOM- and DTM-files are prepared and buffered before the watershed
 segmentation.
 
 ![Workflow for watershed delineation](doc/watershed_workflow.png)
-The watershed delineation is executed on the canopy height model extracted from
+The watershed segmentation is executed on the canopy height model extracted from
 LiDAR and DOM data. The delineation will be executed for forest and open field areas
-with individual settings (`settings/settings.json`).
+with individual settings (See `settings/settings.json`).
 
 Precondition and data
 ---------------------
 The algorithm needs access to the tiled LiDAR point cloud and the tiled DOM and DTM.
 The data should be tiled with **equal raster schema** (e.g. Kartenblatt 1/56).
 The raster tiles should be accessible in a polygon feature class to extract all tiles
-and cartesian 8-neighborhood.
+and the cartesian 8-neighborhood.
 To clip all trees to the boundary of the area of interest, a polygon to this data is additionally required.
-Setup the path to all the data in the configuration file. 
+Setup the path to all the data in the settings file. 
 The access to all required data will be checked before starting the process.
 
 There's no need for a big amount of free hard disk space. The trees will be exported to CSV files
@@ -35,6 +35,12 @@ and summarized in a point feature class. Overall free disk space of 2.5 MB per s
 Depending of the amount of parallel processes and hardware characteristics,
 the algorithm will have a runtime between 1 and 2 minutes per square kilometer.
 
+Results:
+--------
+The framework was successfully used to extract single trees for the are of the canton of Lucerne.
+**11.5 million trees** could be extracted with an overall **runtime of 37 hour** by processing the entire area
+with 6 parallel processes on a normal office hardware.
+![Final trees rendered photo realistic](doc/final_trees.jpg)
 
 Installing
 ----------
