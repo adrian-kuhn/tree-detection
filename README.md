@@ -37,8 +37,8 @@ the algorithm will have a runtime between 1 and 2 minutes per square kilometer.
 
 Results:
 --------
-The framework was successfully used to extract single trees for the are of the canton of Lucerne.
-**11.5 million trees** could be extracted with an overall **runtime of 37 hour** by processing the entire area
+The framework was successfully used to extract single trees for the area of the canton of Lucerne.
+**11.5 million trees** could be extracted with an overall **runtime of 37 hours** by processing the entire area
 with 6 parallel processes on a normal office hardware.
 ![Final trees rendered photo realistic](doc/final_trees.jpg)
 
