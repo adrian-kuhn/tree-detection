@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Module for loading the settings for a given environment from json file
+Module for loading the settings from json file
 """
 import json
 import os
@@ -17,8 +17,7 @@ __SETTING_FILE = "settings.json"
 def init(settings_dir="settings"):
     """
     Search the settings file in settings directory and given environment variable.
-    The settings file has to be in the structure 'env'.settings.json
-    Initialize the settings by loading the JSON file and return the settings Dictonary.
+    Initialize the settings by loading the JSON file and return the settings Dictionary.
 
     :param settings_dir: Relative path to the settings folder. Default is 'settings'
     :type settings_dir: String

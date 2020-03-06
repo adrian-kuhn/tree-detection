@@ -211,8 +211,6 @@ class Tile:
             new_img = numpy.zeros((self.target_extent.height * self.resolution, self.target_extent.width * self.resolution))
             new_img[margin_top:margin_top + self.image.shape[0], margin_left:margin_left + self.image.shape[1]] = self.image
 
-            # plt.imsave(arr=new_img, cmap=plt.get_cmap('Greys_r'), fname='field_{}_{}'.format(self.name, self.number))
-
             self.image = new_img
             self.extent = copy.deepcopy(self.target_extent)
             log.debug("Adapted {} to shape {}".format(self, self.image.shape))
