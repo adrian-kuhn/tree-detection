@@ -22,10 +22,10 @@ if sys.argv[-1] == "publish":
     sys.exit()
 
 required = [
-    "arcgis > 1.6",
-    "numpy >= 1.16.2",
-    "scikit-image >= 0.16",
-    "laspy >= 1.2"
+    "arcgis > 2.4",
+    "numpy >= 1.24",
+    "scikit-image >= 0.25",
+    "laspy >= 2.5.4"
 ]
 
 setup(
