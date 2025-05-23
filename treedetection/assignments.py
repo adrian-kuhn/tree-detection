@@ -7,7 +7,8 @@ import csv
 import os
 
 from skimage.feature import peak_local_max
-from skimage.morphology import label, closing, disk, watershed
+from skimage.morphology import label, closing, disk
+from skimage.segmentation import watershed
 from skimage.measure import regionprops
 from skimage.filters import gaussian
 from skimage.restoration import denoise_tv_chambolle
@@ -294,7 +295,11 @@ class Assignment:
         mask[mask != 0] = 1
 
         # Local maxima
-        local_max = peak_local_max(gauss, indices=False, min_distance=min_distance, exclude_border=False)
+        # Get coordinates of peaks and convert to boolean mask (what indices=False used to do)
+        coordinates = peak_local_max(gauss, min_distance=min_distance, exclude_border=False)
+        local_max = numpy.zeros_like(gauss, dtype=bool)
+        local_max[tuple(coordinates.T)] = True
+
         markers = label(local_max)
         log.debug("Peaked local maxima in {} area {}".format(region, number))
 

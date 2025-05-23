@@ -361,12 +361,11 @@ class LasTile(Tile):
         To be compatible with the DOM and DTM, the numpy array has to be rotated by -90 degree.
         """
         if self.exists():
-            las = laspy.file.File(self.path, mode="r")
-            veg = numpy.where(numpy.logical_and(las.Classification == 5, las.z < self.timberline))
+            las = laspy.read(self.path)
+            veg = numpy.logical_and(las.classification == 5, las.z < self.timberline)
             veg_points = las.points[veg]
-            veg_x = veg_points["point"]["X"] * las.header.scale[0] + las.header.offset[0]
-            veg_y = veg_points["point"]["Y"] * las.header.scale[1] + las.header.offset[1]
-            las.close()
+            veg_x = veg_points.X * las.header.scale[0] + las.header.offset[0]
+            veg_y = veg_points.Y * las.header.scale[1] + las.header.offset[1]
 
             min_x = numpy.min(veg_x) if len(veg_x) > 0 else 0
             max_x = numpy.max(veg_x) if len(veg_x) > 0 else 0
@@ -378,7 +377,7 @@ class LasTile(Tile):
             bin_y = self.extent.height
 
             if bin_x > 0 and bin_y > 0:
-                his, bx, by = numpy.histogram2d(veg_x, veg_y, bins=[(bin_x * self.resolution), (bin_y * self.resolution)])
+                his, bx, by = numpy.histogram2d(veg_x, veg_y, bins=[bin_x * self.resolution, bin_y * self.resolution])
                 self.image = numpy.rot90(his)
             else:
                 self.image = numpy.zeros((0, 0))
